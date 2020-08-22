@@ -30,7 +30,7 @@ function PPHOC(WrappedComponent) {
 
     render() {
       const props = Object.assign({}, this.props, {
-        fields: this.getField.bind(this),
+        fields: this.getField.bind(this),aaa:'aaa'
       })
       return (
         <div>
@@ -48,6 +48,7 @@ function PPHOC(WrappedComponent) {
 
 class Example extends React.Component {
   render() {
+    console.log(this.props.aaa)
     return (
       <div>
         <h2>

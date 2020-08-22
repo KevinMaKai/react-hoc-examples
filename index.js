@@ -66,7 +66,7 @@ import ReactDOM from 'react-dom'
     //)
   //}
 //}
-
+//hoc添加ref
 function Reform(WrappedComponent) {
   return class ReformEnhancer extends WrappedComponent {
     constructor(props) {
@@ -79,10 +79,15 @@ function Reform(WrappedComponent) {
     }
     render() {
       debugger
-      let r = React.createElement(WrappedComponent, Object.assign({},this.props, {ref: 'test'}), null)
+      // let j = React.createElement('li', Object.assign({},this.props, {ref: 'test1'}), 'one');
+      let r = React.createElement(WrappedComponent, Object.assign({},...this.props, {ref: 'test'}), null)
       let i = this.refs.test
-
-      return r
+      console.log(i)
+      // j.props.className='main'
+      if(this.refs.test){
+        this.refs.test.className = 'main';
+      }
+      return r;
     }
   }
 }
@@ -91,9 +96,11 @@ function Reform(WrappedComponent) {
 class Example extends React.Component {
   constructor(props) {
     super(props)
+    console.log(JSON.stringify(props),this.className)
   }
   method() {}
   render() {
+    console.log('??:',JSON.stringify(this.props),this.ref)
     return (
       <form>
         <input type="email" name="nemail"/>

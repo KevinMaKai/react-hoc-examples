@@ -5,14 +5,15 @@ import ReactDOM from 'react-dom'
 
 function PPHOC(WrappedComponent) {
   return class PP extends React.Component {
+    
     constructor(props) {
       super(props)
       this.state = { name: '' }
-
+      this.stack = [];
       this.updateName = this.updateName.bind(this)
     }
-
     updateName(instance) {
+      this.stack.push(instance)
       if (instance.instanceName !== this.state.name)
         this.setState({name: instance.instanceName})
     }
@@ -22,6 +23,7 @@ function PPHOC(WrappedComponent) {
       const props = Object.assign({}, this.props, {
         ref: this.updateName
       })
+      console.log(JSON.stringify(props),this.stack[0])
       return (
         <div>
           <h2>
